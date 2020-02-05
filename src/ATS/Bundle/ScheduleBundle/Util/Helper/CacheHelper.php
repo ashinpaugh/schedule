@@ -120,7 +120,7 @@ class CacheHelper
         
         $finder = Finder::create()
             ->files()
-            ->in($this->helper->getAppRoot() . '/../web/assets/compiled')
+            ->in($this->helper->getAppRoot() . '/web/assets/compiled')
             ->name('controllers.js')
             ->name('libraries.js')
             ->name('utils.js')

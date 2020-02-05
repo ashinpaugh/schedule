@@ -39,13 +39,13 @@ class OdsImportDriver extends AbstractImportDriver
         
         /* @var Connection $connection */
         $connection = $this->getDoctrine()->getConnection('ods');
-        $statement  = $connection->prepare('
+        $statement  = $connection->prepare("
             SELECT COUNT(*)
             FROM `course_section` AS cs
             WHERE cs.status_code = :status_code
               AND cs.sub_academic_period IS NOT NULL
-              AND cs.section_number REGEXP \'[0-9]+\'
-        ');
+              AND cs.section_number REGEXP '[0-9]+'
+        ");
         
         $statement->bindValue('status_code', 'A', \PDO::PARAM_STR);
         $statement->execute();

@@ -2,10 +2,11 @@
 
 namespace ATS\Bundle\ScheduleBundle\Command;
 
+use Doctrine\Bundle\FixturesBundle\Command\LoadDataFixturesDoctrineCommand;
+use Symfony\Component\Console\Exception\LogicException;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
-use Doctrine\Bundle\FixturesBundle\Command\LoadDataFixturesDoctrineCommand;
 
 /**
  * Extends doctrine's fixtures command for integration into the
@@ -15,6 +16,19 @@ use Doctrine\Bundle\FixturesBundle\Command\LoadDataFixturesDoctrineCommand;
  */
 class ImportCommand extends LoadDataFixturesDoctrineCommand
 {
+    protected $importer;
+
+    /**
+     * @param string|null $name The name of the command; passing null means it must be set in configure()
+     *
+     * @throws LogicException When the command name is empty
+     */
+    /*public function __construct(ImportDriverHelper $driver) {
+        parent::__construct('schedule:import');
+
+        $this->importer = $driver;
+    }*/
+
     /**
      * {@inheritDoc}
      */
@@ -46,11 +60,12 @@ class ImportCommand extends LoadDataFixturesDoctrineCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+        ini_set('memory_limit', '4096M');
+
         $source = $input->getOption('source');
         $period = $input->getOption('year');
-        $helper = $this->getContainer()->get('schedule.import_helper');
         
-        $helper
+        $this->getContainer()->get('schedule.import_helper')
             ->setServiceId($source)
             ->setAcademicPeriod($period)
             ->toggleFKChecks(false)

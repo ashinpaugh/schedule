@@ -2,7 +2,11 @@
 
 namespace ATS\Bundle\ScheduleBundle\Controller;
 
+use ATS\Bundle\ScheduleBundle\Entity\Course;
+use ATS\Bundle\ScheduleBundle\Entity\Instructor;
 use ATS\Bundle\ScheduleBundle\Entity\Section;
+use ATS\Bundle\ScheduleBundle\Entity\Subject;
+use ATS\Bundle\ScheduleBundle\Entity\TermBlock;
 use FOS\RestBundle\Controller\Annotations\Prefix;
 use FOS\RestBundle\Controller\Annotations\QueryParam;
 use FOS\RestBundle\Controller\Annotations\Route;
@@ -63,25 +67,25 @@ class SectionController extends AbstractController implements ClassResourceInter
         }
         
         if ($block_id = $fetcher->get('b')) {
-            $block = $this->getRepo('ATSScheduleBundle:TermBlock')
+            $block = $this->getRepo(TermBlock::class)
                 ->findById($block_id)
             ;
         }
         
         if ($instructor_id = $fetcher->get('i')) {
-            $instructor = $this->getRepo('ATSScheduleBundle:Instructor')
+            $instructor = $this->getRepo(Instructor::class)
                 ->findById($instructor_id)
             ;
         }
         
         if ($subject_id = $fetcher->get('s')) {
-            $subject = $this->getRepo('ATSScheduleBundle:Subject')
+            $subject = $this->getRepo(Subject::class)
                 ->findById($subject_id)
             ;
         }
         
         if ($course_id = $fetcher->get('n')) {
-            $course = $this->getRepo('ATSScheduleBundle:Course')
+            $course = $this->getRepo(Course::class)
                 ->findById($course_id)
             ;
         }
@@ -115,6 +119,6 @@ class SectionController extends AbstractController implements ClassResourceInter
         $update    = $this->getLastUpdateLog();
         $timestamp = strtotime($timestamp);
         
-        return $update->getStart()->getTimestamp() === $timestamp;
+        return !empty($update) && $update->getStart()->getTimestamp() === $timestamp;
     }
 }

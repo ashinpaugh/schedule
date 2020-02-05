@@ -1,9 +1,5 @@
 <?php
-/**
- * Tracks update progress.
- * 
- * @author Austin Shinpaugh
- */
+
 namespace ATS\Bundle\ScheduleBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;

@@ -51,7 +51,7 @@ class InstructorController extends AbstractController implements ClassResourceIn
      */
     public function getAction(ParamFetcher $fetcher)
     {
-        $instructor = $this->getRepo('ATSScheduleBundle:Instructor')
+        $instructor = $this->getRepo(Instructor::class)
             ->find($fetcher->get('id'))
         ;
         

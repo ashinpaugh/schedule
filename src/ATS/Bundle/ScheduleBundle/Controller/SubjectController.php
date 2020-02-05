@@ -32,7 +32,7 @@ class SubjectController extends AbstractController implements ClassResourceInter
      */
     public function cgetAction()
     {
-        $subjects = $this->getRepo('ATSScheduleBundle:Subject')
+        $subjects = $this->getRepo(Subject::class)
             ->findAll()
         ;
         
@@ -56,7 +56,7 @@ class SubjectController extends AbstractController implements ClassResourceInter
      */
     public function getAction($subject_id)
     {
-        $subject = $this->getRepo('ATSScheduleBundle:Subject')
+        $subject = $this->getRepo(Subject::class)
             ->findOneBy([
                 'id' => $subject_id,
             ])
@@ -80,7 +80,7 @@ class SubjectController extends AbstractController implements ClassResourceInter
      */
     public function getByNameAction(ParamFetcher $fetcher)
     {
-        $subject = $this->getRepo('ATSScheduleBundle:Subject')
+        $subject = $this->getRepo(Subject::class)
             ->findOneBy([
                 'name' => $fetcher->get('name'),
             ])

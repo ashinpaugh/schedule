@@ -204,8 +204,8 @@ class Section extends AbstractEntity
     {
         $date   = clone $date_obj;
         $time   = 3 === strlen($time) ? '0' . $time : $time;
-        $hour   = substr($time, 0, 2);
-        $minute = substr($time, 2);
+        $hour   = (int) substr($time, 0, 2);
+        $minute = (int) substr($time, 2);
         
         return $date->setTime($hour, $minute)->format('c');
     }

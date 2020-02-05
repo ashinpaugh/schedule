@@ -36,7 +36,7 @@ class CourseController extends AbstractController implements ClassResourceInterf
      */
     public function cgetAction()
     {
-        $courses = $this->getRepo('ATSScheduleBundle:Course')
+        $courses = $this->getRepo(Course::class)
             ->findBy([], ['number' => 'ASC'])
         ;
         
@@ -62,7 +62,7 @@ class CourseController extends AbstractController implements ClassResourceInterf
      */
     public function getAction($subject_id, $course_id)
     {
-        return $this->getRepo('ATSScheduleBundle:Course')
+        return $this->getRepo(Course::class)
             ->findOneBy([
                 'subject' => [
                     'id' => $subject_id,
@@ -94,7 +94,7 @@ class CourseController extends AbstractController implements ClassResourceInterf
      */
     public function getByNumberAction(ParamFetcher $fetcher)
     {
-        return $this->getRepo('ATSScheduleBundle:Course')
+        return $this->getRepo(Course::class)
             ->findBy([
                 'subject' => [
                     'name' => $fetcher->get('subject')

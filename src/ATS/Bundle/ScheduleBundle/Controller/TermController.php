@@ -2,6 +2,7 @@
 
 namespace ATS\Bundle\ScheduleBundle\Controller;
 
+use ATS\Bundle\ScheduleBundle\Entity\Term;
 use FOS\RestBundle\Controller\Annotations\RouteResource;
 use FOS\RestBundle\Controller\Annotations\View;
 use FOS\RestBundle\Routing\ClassResourceInterface;
@@ -22,7 +23,7 @@ class TermController extends AbstractController implements ClassResourceInterfac
      */
     public function cgetAction()
     {
-        $terms = $this->getRepo('ATSScheduleBundle:Term')
+        $terms = $this->getRepo(Term::class)
             ->findBy([], ['year' => 'DESC', 'semester' => 'ASC'])
         ;
         

@@ -36,6 +36,8 @@ class ParseBookCommand extends AbstractCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+        ini_set('memory_limit', '4096M');
+
         $this->getContainer()->get('ats_schedule.book_parser')
             ->setPath($input->getArgument('path'))
             ->setIncludeOnline($input->getOption('include_online'))

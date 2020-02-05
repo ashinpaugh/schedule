@@ -211,7 +211,7 @@ class SetupCommand extends AbstractCommand
         $output->writeln('Generating optimized autoloader...');
         
         $path    = $this->getAppRoot();
-        $process = new Process("/usr/local/bin/composer dump-autoload --optimize --classmap-authoritative -d {$path}");
+        $process = new Process("$(which composer) dump-autoload --optimize --classmap-authoritative -d {$path}");
         $process->run();
         
         if (!$process->isSuccessful()) {

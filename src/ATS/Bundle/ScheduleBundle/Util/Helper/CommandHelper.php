@@ -25,10 +25,8 @@ class CommandHelper
      */
     public function getConsolePath()
     {
-        return '/usr/local/bin/php '
-            . $this->getAppRoot()
-            . 'bin/console'
-        ;
+        // return 'php ' . $this->getAppRoot() . '/bin/console';
+        return '$(which php) ' . $this->getAppRoot() . '/bin/console';
     }
     
     /**
@@ -38,6 +36,6 @@ class CommandHelper
      */
     public function getAppRoot()
     {
-        return $this->root_dir . '/../';
+        return realpath($this->root_dir . '/..');
     }
 }

@@ -33,7 +33,7 @@ class InstructorRepository extends EntityRepository
               ON s.subject_id = sub.id
             JOIN instructor AS i
               ON s.instructor_id = i.id
-            GROUP BY sub.id, i.id
+            GROUP BY sub.id, i.id, i.name
             ORDER BY i.name
         ');
         

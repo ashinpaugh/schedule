@@ -201,7 +201,7 @@ class BookParser
         
         $subject = $data[1];
         $key     = $this->getKey(['name' => $subject]);
-        $repo    = $this->getManager()->getRepository('ATSScheduleBundle:Subject');
+        $repo    = $this->getManager()->getRepository(Subject::class);
         
         if ($object = $this->getStored($instances, $key, $repo)) {
             return $object;
@@ -223,7 +223,7 @@ class BookParser
         
         $value = $data[9];
         $key   = $this->getKey(['name' => $value]);
-        $repo  = $this->getManager()->getRepository('ATSScheduleBundle:Campus');
+        $repo  = $this->getManager()->getRepository(Campus::class);
         
         if ($object = $this->getStored($instances, $key, $repo)) {
             return $object;
@@ -245,7 +245,7 @@ class BookParser
         static $instances;
         
         $key  = $this->getKey(['name' => $location['building'], 'campus' => $campus->getName()]);
-        $repo = $this->getManager()->getRepository('ATSScheduleBundle:Building');
+        $repo = $this->getManager()->getRepository(Building::class);
         
         if ($object = $this->getStored($instances, $key, $repo)) {
             return $object;
@@ -271,7 +271,7 @@ class BookParser
         
         $name = $location['room'] ?: '0000';
         $key  = $this->getKey(['number' => $name, 'building' => $building->getName()]);
-        $repo = $this->getManager()->getRepository('ATSScheduleBundle:Room');
+        $repo = $this->getManager()->getRepository(Room::class);
         
         if ($object = $this->getStored($instances, $key, $repo)) {
             return $object;
@@ -297,7 +297,7 @@ class BookParser
         $id   = (int) $data[7];
         $name = $data[7] ? $data[6] : 'N/A';
         $key  = $this->getKey(['id' => $id, 'name' => $name]);
-        $repo = $this->getManager()->getRepository('ATSScheduleBundle:Instructor');
+        $repo = $this->getManager()->getRepository(Instructor::class);
         
         if ($object = $this->getStored($instances, $key, $repo)) {
             return $object;
@@ -320,7 +320,7 @@ class BookParser
         
         $term = $this->parseTerm($data);
         $key  = $this->getKey(['year' => $term['year'], 'semester' => $term['semester']]);
-        $repo = $this->getManager()->getRepository('ATSScheduleBundle:Term');
+        $repo = $this->getManager()->getRepository(Term::class);
         
         if ($object = $this->getStored($instances, $key, $repo)) {
             $block = $this->validateTermBlock($object, $term['block']);
@@ -347,7 +347,7 @@ class BookParser
         //$subject = $data[1];
         $number  = $data[2];
         $key     = $this->getKey(['subject' => $subject->getName(), 'number' => $number]);
-        $repo    = $this->getManager()->getRepository('ATSScheduleBundle:Course');
+        $repo    = $this->getManager()->getRepository(Course::class);
         
         if ($object = $this->getStored($instances, $key, $repo)) {
             return $object;
@@ -382,7 +382,7 @@ class BookParser
         static $instances;
         
         $key   = $this->getKey(['crn' => $data[4], 'semester' => $block->getId()]);
-        $repo  = $this->getManager()->getRepository('ATSScheduleBundle:Section');
+        $repo  = $this->getManager()->getRepository(Section::class);
         $event = $this->getStored($instances, $key, $repo) ?: new Section();
         
         $event
@@ -459,7 +459,7 @@ class BookParser
         static $instances;
         
         $key  = $this->getKey(['term' => $term->getName(), 'name' => $block]);
-        $repo = $this->getManager()->getRepository('ATSScheduleBundle:TermBlock');
+        $repo = $this->getManager()->getRepository(TermBlock::class);
         
         if ($object = $this->getStored($instances, $key, $repo)) {
             return $object;
