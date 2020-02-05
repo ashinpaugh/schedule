@@ -3,6 +3,8 @@ web/assets/compiled/
 web/images/
 web/assets/vendor/*/node_modules/
 node_modules/
+web/assets/vendor/*
+
 
 /app/config/parameters.yml
 /build/
